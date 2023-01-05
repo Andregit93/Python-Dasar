@@ -1,0 +1,32 @@
+<MyLayout>
+	name: "asdjas"
+	do_default_tab: False
+
+	size_hint: .5, .5
+	pos_hint: {'center_x': .5, 'center_y': .5}
+
+        # ft_top, left_mid, left_bottom, top_left, 
+        # top_mid, top_right, right_top, right_mid, 
+        # right_bottom, bottom_left, bottom_mid, 
+        # bottom_right.
+    
+	tab_pos: 'top_mid'
+
+	TabbedPanelItem:
+		text: "Tab 1"
+		Label:
+			text: "Hello World!"
+
+	TabbedPanelItem:
+		text: "Tab 2"
+		BoxLayout:
+			Label:
+				text: "Press The Button =>"
+			Button:
+				text: "Click Me!!"
+
+	TabbedPanelItem:
+		text: "Tab 3"
+
+		Image:
+			source: "img/01.jpg"

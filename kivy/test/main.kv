@@ -1,0 +1,111 @@
+WindowManager:
+	FirstWindow:
+	SecondWindow:
+	ThirdWindow:
+
+
+<FirstWindow>:
+	name: "first"
+
+	BoxLayout:
+		orientation: "vertical"
+		size: root.width, root.height
+		
+		padding: 20, 20, 20, 10
+		spacing: 20
+
+		Image:
+			source: 'img/bro.jpg'
+			size_hint: 0.6, 0.15
+			pos_hint: {'x': 0.20, 'y': 0.009}
+			allow_stretch: True
+			keep_ratio: True
+
+		Button:
+			text: "Tambah Data"
+			font_size: 30
+            pos_hint: {'x': 0.20, 'y': 0.009}
+            size_hint: 0.6, 0.03
+			on_release: 
+				app.root.current = "second"
+				root.manager.transition.direction = "left"
+
+
+<SecondWindow>:
+	name: "second"
+
+    BoxLayout:
+        orientation: "vertical"
+		size: root.width, root.height
+
+		Spinner:
+			id: spinner_id
+			text: "LOGIN"
+			font_size: 50
+			values: ["Admin", "User", "Guest"]
+
+			on_text: root.spinner_clicked(spinner_id.text)
+        
+        Label:
+			id: click_label
+			text: "Login Before Start"
+			font_size: 32
+
+		Button:
+			text: "Start"
+			font_size: 40
+			on_release: 
+				app.root.current = "tabs"
+				root.manager.transition.direction = "right"	
+
+		Button:
+			text: "Go Back"
+			font_size: 40
+			on_release: 
+				app.root.current = "first"
+				root.manager.transition.direction = "right"
+
+<ThirdWindow>:
+	name: "tabs"
+
+	do_default_tab: False
+
+	size_hint: 1, 1
+	pos_hint: {'center_x': .5, 'center_y': .5}
+
+        # ft_top, left_mid, left_bottom, top_left, 
+        # top_mid, top_right, right_top, right_mid, 
+        # right_bottom, bottom_left, bottom_mid, 
+        # bottom_right.
+    
+	tab_pos: 'top_mid'
+
+	TabbedPanelItem:
+		text: "Nature"
+		Image:
+			source: "img/01.jpg"
+
+	TabbedPanelItem:
+		text: "Futuristic"
+		Image:
+			source: "img/02.jpg"
+	TabbedPanelItem:
+		text: "Food"
+		Image:
+			source: "img/03.jpg"
+	TabbedPanelItem:
+		text: "Animal"
+		Image:
+			source: "img/04.jpg"
+	TabbedPanelItem:
+		text: "Travel"
+		Image:
+			source: "img/05.jpg"
+	TabbedPanelItem:
+		text: "Log Out"
+		Button:
+			text: "Log Out"
+			font_size: 100
+			on_release: 
+				app.root.current = "first"
+				root.manager.transition.direction = "right"

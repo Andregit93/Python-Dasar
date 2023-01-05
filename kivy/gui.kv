@@ -1,0 +1,225 @@
+<myrv@recycleview>:
+    viewclass: 'SelectableButton'
+    SelectableRecycleGridLayout:
+        cols: 1
+        default_size: None, dp(26)
+        default_size_hint: 1, None
+        size_hint_y: None
+        height: self.minimum_height       
+        multiselect: True
+        touch_multiselect: True
+     
+</myrv@recycleview>
+
+<rv>:
+    BoxLayout:
+        orientation: 'vertical'
+        GridLayout:
+            size_hint: 1, None
+            height: 25
+            cols: 2
+            Label:
+                size_hint_x: 0.2
+                text: 'ID'
+            Label:
+                size_hint_x: 0.8
+                text: 'Título do Livro'
+        BoxLayout:
+            MyRV:
+                size_hint_x: 0.2
+                data: [{'text': str(x)} for x in root.col1]
+            MyRV:
+                size_hint_x: 0.8
+                data: [{'text': str(x)} for x in root.col2]
+        Button:
+            size_hint_y: 0.2
+            text: 'Voltar ao Menu'
+            on_press: root.manager.current ='menu'
+ 
+     
+</rv>
+
+<menu>:
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            size_hint: (1, 0.4)
+            text: 'CRUD SQLite \nPrincipais Operações em \n Banco de Dados \n\n Organizador de Livros'
+            halign: 'center'
+        Button:
+            size_hint: (1, 0.2)
+            text: 'Todos os Livros'
+            on_press: app.selecionar_todos_livros()
+        Button:
+            size_hint: (1, 0.2)
+            text: 'Cadastrar Livro'
+            on_press: root.manager.current = 'create'
+        Button:
+            size_hint: (1, 0.2)
+            text: 'Selecionar Livro'
+            on_press: root.manager.current='read'
+        Button:
+            size_hint: (1, 0.2)
+            text: 'Atualizar Livro'
+            on_press: root.manager.current = 'update'
+        Button:
+            size_hint: (1, 0.2)
+            text: 'Excluir Livro'
+            on_press: root.manager.current ='delete'
+ 
+     
+</menu>
+
+<create_sc>
+    txt_id: txt_id
+    txt_tit: txt_tit
+    txt_aut: txt_aut
+    txt_dat: txt_dat
+    txt_pat: txt_pat
+    txt_tpg: txt_tpg
+    lbl_resposta: lbl_resposta
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            hint_text: 'ID'
+            id: txt_id
+        TextInput:
+            hint_text: 'Título do Livro'
+            id: txt_tit
+        TextInput:
+            hint_text: 'Autor do Livro'
+            id: txt_aut
+        TextInput:
+            hint_text: 'Data da Leitura'
+            id: txt_dat
+        TextInput:
+            hint_text: 'Página Atual'
+            id: txt_pat
+        TextInput:
+            hint_text: 'Total de Páginas'
+            id: txt_tpg
+        Label:
+            text: 'Esperando Interação...'
+            id: lbl_resposta
+        Button:
+            text: 'Cadastrar Livro'
+            on_press: app.inserir_livro(txt_tit.text, txt_aut.text, txt_dat.text, txt_pat.text, txt_tpg.text)
+        Button:
+            text: 'Voltar ao Menu'
+            on_press: root.manager.current = 'menu' 
+ 
+     
+</create_sc>
+
+<read_sc>:
+    titulo: titulo
+    autor: autor
+    datal: datal
+    cid: cid
+    patual: patual
+    tpags: tpags
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            id: cid
+            hint_text: 'ID'
+        Label:
+            id: titulo
+            text: 'Título do Livro'
+        Label:
+            id: autor
+            text: 'Autor do Livro'
+        Label:
+            id: datal
+            text: 'Data da Leitura'
+        Label:
+            id: patual
+            text: 'Página Atual'
+        Label:
+            id:tpags
+            text: 'Total de Páginas'
+        Button:
+            text: 'Selecionar Livro'
+            on_press: app.selecionar_livro(cid.text, 'selecionar')
+        Button:
+            text: 'Voltar ao Menu'
+            on_press: root.manager.current = 'menu'
+ 
+     
+</read_sc>
+
+<update_sc>:
+    upd_id: upd_id
+    upd_tit: upd_tit
+    upd_aut: upd_aut
+    upd_dat: upd_dat
+    upd_pat: upd_pat
+    upd_tpg: upd_tpg
+    lbl_resposta: lbl_resposta
+    BoxLayout:
+        orientation: 'vertical'
+        Label:
+            text: 'ID'
+        TextInput:
+            id: upd_id
+            hint_text: 'ID'
+        TextInput:
+            id: upd_tit
+            hint_text: 'Título do Livro'
+        TextInput:
+            id: upd_aut
+            hint_text: 'Autor do Livro'
+        TextInput:
+            id: upd_dat
+            hint_text: 'Data Última Leitura'
+        TextInput:
+            id: upd_pat
+            hint_text: 'Página Atual'
+        TextInput:
+            id: upd_tpg
+            hint_text: 'Quantidade de Páginas'
+        Label:
+            id: lbl_resposta
+            text: 'Esperando Interação...'
+        Button:
+            text: 'Selecionar Livro'
+            on_press: app.selecionar_livro(upd_id.text, 'atualizar')
+        Button:
+            text: 'Atualizar Livro'
+            on_press: app.atualizar_livro(upd_id.text, upd_tit.text, upd_aut.text, upd_dat.text, upd_pat.text, upd_tpg.text)
+        Button:
+            text: 'Voltar ao Menu'
+            on_press: root.manager.current = 'menu'
+ 
+     
+</update_sc>
+
+<delete_sc>:
+    del_id: del_id
+    del_tit: del_tit
+    del_aut: del_aut
+    lbl_resposta: lbl_resposta
+    BoxLayout:
+        orientation: 'vertical'
+        TextInput:
+            id: del_id
+            hint_text: 'ID'
+        Label:
+            id: del_tit
+            text: 'Título do Livro'
+        Label:
+            id: del_aut
+            text: 'Autor do Livro'
+        Label:
+            id: lbl_resposta
+            text: 'Esperando Interação...'
+        Button:
+            text: 'Selecionar Livro'
+            on_press: app.selecionar_livro(del_id.text, 'excluir')
+        Button:          
+            text: 'Excluir Livro'
+            on_press: app.deletar_livro(del_id.text)
+        Button:
+            text: 'Voltar ao Menu'
+            on_press: root.manager.current = 'menu'          
+</delete_sc>
