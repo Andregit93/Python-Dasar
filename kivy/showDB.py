@@ -8,7 +8,7 @@ conn = sqlite3.connect("student.db")
 cursor = conn.cursor()
 
 # Menampilkan Semua isi dari tabel students
-cursor.execute("select * from students")
+cursor.execute("select * from employs ")
 for row in cursor:
     print(row)
 

@@ -45,9 +45,9 @@ def show_data(self):
         
     for row in self.result:
         self.output_no += '\n' + str(row[0])
-        self.output_nama += '\n' + '|' + str(row[1])
-        self.output_nim += '\n' + '|' + str(row[2])
-        self.output_prodi += '\n' + '|' + str(row[3])
+        self.output_nama += '\n' + str(row[1])
+        self.output_nim += '\n' + str(row[2])
+        self.output_prodi += '\n' + str(row[3])
 
     output_no.text += self.output_no
     output_nama.text += self.output_nama
